@@ -23,22 +23,22 @@ import com.intellij.openapi.editor.actionSystem.TypedActionHandler
 /**
  * @author airsaid
  */
-class ListenerActionHandler(oldHandler: TypedActionHandler, number: Int, listener: () -> Unit) :
-    TypedActionHandler {
+class ListenerActionHandler(
+    private val oldHandler: TypedActionHandler,
+    private val maxCount: Int,
+    private val callback: () -> Unit
+) : TypedActionHandler {
 
-    private val oldTypedActionHandler = oldHandler
-    private val onChangeImageListener = listener
-    private val maxNumber = number
     private var count = 0
 
     override fun execute(editor: Editor, charTyped: Char, dataContext: DataContext) {
-        oldTypedActionHandler.execute(editor, charTyped, dataContext)
+        oldHandler.execute(editor, charTyped, dataContext)
         val text = charTyped.toString().trim()
         if (text.isEmpty()) return
 
         count += 1
-        if (count >= maxNumber) {
-            onChangeImageListener.invoke()
+        if (count >= maxCount) {
+            callback.invoke()
             count = 0
         }
     }
