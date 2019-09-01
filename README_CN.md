@@ -10,9 +10,9 @@
 
 # 安装
 - 在 Windows 上使用内置插件系统安装：
-    - ```File``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “InspireWriting”``` > ``` Install Plugin```
+    - ```File``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “Inspire Writing”``` > ``` Install Plugin```
 - 在 macOS 上使用内置插件系统安装：
-    - ```Preferences``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “InspireWriting”``` > ``` Install Plugin```
+    - ```Preferences``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “Inspire Writing”``` > ``` Install Plugin```
 - 手动安装:
      - 下载这个 [latest release](https://github.com/Airsaid/InspireWritingPlugin/releases) 链接中的安装包并手动安装 ```Preferences``` > ```Plugins``` > ```Install plugin from disk...```
 

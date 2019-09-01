@@ -10,9 +10,9 @@ Whenever you write code that exceeds the specified character, the plugin will au
 
 # Installation
 - Using IDE built-in plugin system on Windows:
-    - ```File``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “InspireWriting”``` > ``` Install Plugin```
+    - ```File``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “Inspire Writing”``` > ``` Install Plugin```
 - Using IDE built-in plugin system on macOS:
-    - ```Preferences``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “InspireWriting”``` > ``` Install Plugin```
+    - ```Preferences``` > ```Settings``` > ```Plugins``` > ```Browse repositories…``` > ```Search for “Inspire Writing”``` > ``` Install Plugin```
 - Manually:
      - Download the [latest release](https://github.com/Airsaid/InspireWritingPlugin/releases) and install it manually using ```Preferences``` > ```Plugins``` > ```Install plugin from disk...```
 
