@@ -34,15 +34,20 @@ import java.io.File
 class InspireWriting : BaseComponent {
 
     private val imagesPaths = mutableListOf<String>()
+    private lateinit var listener: ListenerActionHandler
 
     override fun initComponent() {
         super.initComponent()
         val typedAction = EditorActionManager.getInstance().typedAction
-        val listener = ListenerActionHandler(typedAction.handler, PluginConfig.getInputCount()) {
+        listener = ListenerActionHandler(typedAction.handler, PluginConfig.getInputCount()) {
             changeBackgroundImage()
         }
         typedAction.setupHandler(listener)
         updateImagesPath()
+    }
+
+    fun setInputCount(count: Int) {
+        listener.setMaxCount(count)
     }
 
     fun updateImagesPath() {
@@ -75,4 +80,5 @@ class InspireWriting : BaseComponent {
         val path = imagesPaths.random()
         BackgroundUtil.updateBackground(path)
     }
+
 }

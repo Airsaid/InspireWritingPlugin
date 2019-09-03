@@ -25,7 +25,7 @@ import com.intellij.openapi.editor.actionSystem.TypedActionHandler
  */
 class ListenerActionHandler(
     private val oldHandler: TypedActionHandler,
-    private val maxCount: Int,
+    private var maxCount: Int,
     private val callback: () -> Unit
 ) : TypedActionHandler {
 
@@ -41,5 +41,10 @@ class ListenerActionHandler(
             callback.invoke()
             count = 0
         }
+    }
+
+    fun setMaxCount(maxCount: Int) {
+        this.maxCount = maxCount
+        this.count = 0
     }
 }

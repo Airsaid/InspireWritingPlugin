@@ -51,10 +51,11 @@ class InspireWritingConfigurable : Configurable {
         PluginConfig.setImagesPath(path)
         PluginConfig.setInputCount(count)
 
-        ApplicationManager
+        val component = ApplicationManager
             .getApplication()
             .getComponent(InspireWriting::class.java)
-            .updateImagesPath()
+        component.setInputCount(count)
+        component.updateImagesPath()
     }
 
     override fun reset() {
