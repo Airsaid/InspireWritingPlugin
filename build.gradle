@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.airsaid'
-version '1.0.2'
+version '1.0.3'
 
 repositories {
     mavenCentral()
@@ -32,6 +32,7 @@ patchPluginXml {
       <li>V1.0.0: Basic function.</li>
       <li>V1.0.1: Support for more IDE versions.</li>
       <li>V1.0.2: Fix modifying InputCount must restart IDE bug.</li>
+      <li>V1.0.3: Add opacity support.</li>
       """
 }
 
