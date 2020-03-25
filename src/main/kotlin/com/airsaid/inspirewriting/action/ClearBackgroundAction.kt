@@ -24,7 +24,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
  * @author airsaid
  */
 class ClearBackgroundAction : AnAction() {
-    override fun actionPerformed(e: AnActionEvent) {
-        BackgroundUtil.clearBackground()
-    }
+  override fun actionPerformed(e: AnActionEvent) {
+    BackgroundUtil.clearBackground()
+  }
 }

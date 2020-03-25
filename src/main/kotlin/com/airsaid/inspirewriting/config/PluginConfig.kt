@@ -26,31 +26,31 @@ import java.io.File
  */
 object PluginConfig {
 
-    private const val PLUGIN_ID = "com.airsaid.InspireWriting"
+  private const val PLUGIN_ID = "com.airsaid.InspireWriting"
 
-    private const val DEF_INPUT_COUNT = 100
-    private const val DEF_IMAGE_DIR_NAME = "Images"
+  private const val DEF_INPUT_COUNT = 100
+  private const val DEF_IMAGE_DIR_NAME = "Images"
 
-    private const val KEY_IMAGES_PATH = PLUGIN_ID.plus(".imagesPath")
-    private const val KEY_INPUT_COUNT = PLUGIN_ID.plus(".inputCount")
+  private const val KEY_IMAGES_PATH = PLUGIN_ID.plus(".imagesPath")
+  private const val KEY_INPUT_COUNT = PLUGIN_ID.plus(".inputCount")
 
-    fun setImagesPath(path: String) = PropertiesComponent.getInstance().setValue(KEY_IMAGES_PATH, path)
+  fun setImagesPath(path: String) = PropertiesComponent.getInstance().setValue(KEY_IMAGES_PATH, path)
 
-    fun getImagesPath(): String = PropertiesComponent.getInstance()
-        .getValue(KEY_IMAGES_PATH, getDefaultImagesPath())
+  fun getImagesPath(): String = PropertiesComponent.getInstance()
+    .getValue(KEY_IMAGES_PATH, getDefaultImagesPath())
 
-    fun setInputCount(count: Int) = PropertiesComponent.getInstance()
-        .setValue(KEY_INPUT_COUNT, count, getDefaultInputCount())
+  fun setInputCount(count: Int) = PropertiesComponent.getInstance()
+    .setValue(KEY_INPUT_COUNT, count, getDefaultInputCount())
 
-    fun getInputCount(): Int = PropertiesComponent.getInstance()
-        .getInt(KEY_INPUT_COUNT, DEF_INPUT_COUNT)
+  fun getInputCount(): Int = PropertiesComponent.getInstance()
+    .getInt(KEY_INPUT_COUNT, DEF_INPUT_COUNT)
 
-    private fun getDefaultImagesPath(): String {
-        val path = PluginManager.getPlugin(PluginId.getId(PLUGIN_ID))?.path?.path ?: ""
-        val dir = File(path, DEF_IMAGE_DIR_NAME)
-        if (!dir.exists()) dir.mkdirs()
-        return dir.path
-    }
+  private fun getDefaultImagesPath(): String {
+    val path = PluginManager.getPlugin(PluginId.getId(PLUGIN_ID))?.path?.path ?: ""
+    val dir = File(path, DEF_IMAGE_DIR_NAME)
+    if (!dir.exists()) dir.mkdirs()
+    return dir.path
+  }
 
-    private fun getDefaultInputCount(): Int = DEF_INPUT_COUNT
+  private fun getDefaultInputCount(): Int = DEF_INPUT_COUNT
 }

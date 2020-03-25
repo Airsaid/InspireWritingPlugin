@@ -23,32 +23,32 @@ import com.intellij.openapi.wm.impl.IdeBackgroundUtil
  * @author airsaid
  */
 object BackgroundUtil {
-    fun updateBackground(path: String) {
-        setBackground(path)
-    }
+  fun updateBackground(path: String) {
+    setBackground(path)
+  }
 
-    fun clearBackground() {
-        setBackground("")
-    }
+  fun clearBackground() {
+    setBackground("")
+  }
 
-    private fun setBackground(path: String) {
-        val newValue = calcNewValue(path)
-        val prop = PropertiesComponent.getInstance()
-        prop.setValue(IdeBackgroundUtil.FRAME_PROP, null)
-        prop.setValue(IdeBackgroundUtil.EDITOR_PROP, newValue)
-        IdeBackgroundUtil.repaintAllWindows()
-    }
+  private fun setBackground(path: String) {
+    val newValue = calcNewValue(path)
+    val prop = PropertiesComponent.getInstance()
+    prop.setValue(IdeBackgroundUtil.FRAME_PROP, null)
+    prop.setValue(IdeBackgroundUtil.EDITOR_PROP, newValue)
+    IdeBackgroundUtil.repaintAllWindows()
+  }
 
-    private fun calcNewValue(path: String): String? {
-        if (path.isEmpty()) {
-            return null
-        }
-        val oldValue = PropertiesComponent.getInstance().getValue(IdeBackgroundUtil.EDITOR_PROP, "")
-        val values = oldValue.split(",")
-        if (values.isEmpty()) {
-            return oldValue
-        }
-        val oldPath = values[0]
-        return oldValue.replace(oldPath, path)
+  private fun calcNewValue(path: String): String? {
+    if (path.isEmpty()) {
+      return null
     }
+    val oldValue = PropertiesComponent.getInstance().getValue(IdeBackgroundUtil.EDITOR_PROP, "")
+    val values = oldValue.split(",")
+    if (values.isEmpty()) {
+      return oldValue
+    }
+    val oldPath = values[0]
+    return oldValue.replace(oldPath, path)
+  }
 }

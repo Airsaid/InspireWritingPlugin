@@ -33,52 +33,57 @@ import java.io.File
  */
 class InspireWriting : BaseComponent {
 
-    private val imagesPaths = mutableListOf<String>()
-    private lateinit var listener: ListenerActionHandler
+  private val imagesPaths = mutableListOf<String>()
+  private lateinit var handler: ListenerActionHandler
 
-    override fun initComponent() {
-        super.initComponent()
-        val typedAction = EditorActionManager.getInstance().typedAction
-        listener = ListenerActionHandler(typedAction.handler, PluginConfig.getInputCount()) {
-            changeBackgroundImage()
+  override fun initComponent() {
+    super.initComponent()
+    val typedAction = EditorActionManager.getInstance().typedAction
+    handler = ListenerActionHandler(typedAction.handler, PluginConfig.getInputCount()) {
+      changeBackgroundImage()
+    }
+    typedAction.setupHandler(handler)
+    updateImagesPath()
+  }
+
+  fun setInputCount(count: Int) {
+    handler.setMaxCount(count)
+  }
+
+  fun updateImagesPath() {
+    val project = ProjectManager.getInstance().defaultProject
+    ProgressManager.getInstance().run(object : Task.Backgroundable(project, "Find images...", false) {
+      override fun run(indicator: ProgressIndicator) {
+        val imagesDir = File(PluginConfig.getImagesPath())
+        imagesPaths.clear()
+        imagesPaths.addAll(imagesDir.walk()
+          .maxDepth(1)
+          .filter { it.isFile }
+          .filter { it.extension in listOf("png", "jpg", "jpeg") }
+          .map {
+            indicator.text = "Found ${it.name} image..."
+            it.path
+          })
+
+        if (imagesPaths.isEmpty()) {
+          NotificationUtil.notifyWarning(
+            "The image file is not found in the path. Please check ${imagesDir.path} path."
+          )
         }
-        typedAction.setupHandler(listener)
-        updateImagesPath()
-    }
+      }
+    })
+  }
 
-    fun setInputCount(count: Int) {
-        listener.setMaxCount(count)
-    }
+  private fun changeBackgroundImage() {
+    if (imagesPaths.isEmpty()) return
 
-    fun updateImagesPath() {
-        val project = ProjectManager.getInstance().defaultProject
-        ProgressManager.getInstance().run(object : Task.Backgroundable(project, "Find images...", false) {
-            override fun run(indicator: ProgressIndicator) {
-                val imagesDir = File(PluginConfig.getImagesPath())
-                imagesPaths.clear()
-                imagesPaths.addAll(imagesDir.walk()
-                    .maxDepth(1)
-                    .filter { it.isFile }
-                    .filter { it.extension in listOf("png", "jpg", "jpeg") }
-                    .map {
-                        indicator.text = "Found ${it.name} image..."
-                        it.path
-                    })
+    val path = imagesPaths.random()
+    BackgroundUtil.updateBackground(path)
+  }
 
-                if (imagesPaths.isEmpty()) {
-                    NotificationUtil.notifyWarning(
-                        "The image file is not found in the path. Please check ${imagesDir.path} path."
-                    )
-                }
-            }
-        })
-    }
-
-    private fun changeBackgroundImage() {
-        if (imagesPaths.isEmpty()) return
-
-        val path = imagesPaths.random()
-        BackgroundUtil.updateBackground(path)
-    }
+  override fun disposeComponent() {
+    super.disposeComponent()
+    handler.dispose()
+  }
 
 }

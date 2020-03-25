@@ -24,13 +24,13 @@ import com.intellij.notification.Notifications
  * @author airsaid
  */
 object NotificationUtil {
-    fun notifyWarning(content: String) {
-        val n = Notification(
-            "Inspire Writing",
-            "Warning",
-            content,
-            NotificationType.WARNING
-        )
-        Notifications.Bus.notify(n)
-    }
+  fun notifyWarning(content: String) {
+    val n = Notification(
+      "Inspire Writing",
+      "Warning",
+      content,
+      NotificationType.WARNING
+    )
+    Notifications.Bus.notify(n)
+  }
 }

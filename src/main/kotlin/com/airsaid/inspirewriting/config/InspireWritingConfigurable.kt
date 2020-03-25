@@ -32,49 +32,49 @@ import javax.swing.SpinnerNumberModel
  */
 class InspireWritingConfigurable : Configurable {
 
-    private lateinit var rootPanel: JPanel
-    private lateinit var imagePath: TextFieldWithBrowseButton
-    private lateinit var inputCount: JSpinner
+  private lateinit var rootPanel: JPanel
+  private lateinit var imagePath: TextFieldWithBrowseButton
+  private lateinit var inputCount: JSpinner
 
-    override fun getDisplayName(): String {
-        return "Inspire Writing"
-    }
+  override fun getDisplayName(): String {
+    return "Inspire Writing"
+  }
 
-    override fun isModified(): Boolean {
-        val path = imagePath.text
-        return path.isNotEmpty()
-    }
+  override fun isModified(): Boolean {
+    val path = imagePath.text
+    return path.isNotEmpty()
+  }
 
-    override fun apply() {
-        val path = imagePath.text
-        val count = inputCount.value.toString().toInt()
-        PluginConfig.setImagesPath(path)
-        PluginConfig.setInputCount(count)
+  override fun apply() {
+    val path = imagePath.text
+    val count = inputCount.value.toString().toInt()
+    PluginConfig.setImagesPath(path)
+    PluginConfig.setInputCount(count)
 
-        val component = ApplicationManager
-            .getApplication()
-            .getComponent(InspireWriting::class.java)
-        component.setInputCount(count)
-        component.updateImagesPath()
-    }
+    val component = ApplicationManager
+      .getApplication()
+      .getComponent(InspireWriting::class.java)
+    component.setInputCount(count)
+    component.updateImagesPath()
+  }
 
-    override fun reset() {
-        imagePath.text = PluginConfig.getImagesPath()
-        inputCount.value = PluginConfig.getInputCount()
-        updateUI()
-    }
+  override fun reset() {
+    imagePath.text = PluginConfig.getImagesPath()
+    inputCount.value = PluginConfig.getInputCount()
+    updateUI()
+  }
 
-    override fun createComponent(): JComponent? {
-        imagePath.isEditable = false
-        val singleFolderDesc = FileChooserDescriptorFactory.createSingleFolderDescriptor()
-        imagePath.addBrowseFolderListener(object : TextBrowseFolderListener(singleFolderDesc) {})
-        inputCount.model = SpinnerNumberModel(PluginConfig.getInputCount(), 10, Int.MAX_VALUE, 10)
-        return rootPanel
-    }
+  override fun createComponent(): JComponent? {
+    imagePath.isEditable = false
+    val singleFolderDesc = FileChooserDescriptorFactory.createSingleFolderDescriptor()
+    imagePath.addBrowseFolderListener(object : TextBrowseFolderListener(singleFolderDesc) {})
+    inputCount.model = SpinnerNumberModel(PluginConfig.getInputCount(), 10, Int.MAX_VALUE, 10)
+    return rootPanel
+  }
 
-    private fun updateUI() {
-        imagePath.updateUI()
-        inputCount.updateUI()
-    }
+  private fun updateUI() {
+    imagePath.updateUI()
+    inputCount.updateUI()
+  }
 
 }
